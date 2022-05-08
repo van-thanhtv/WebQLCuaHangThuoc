@@ -9,6 +9,7 @@ import java.io.IOException;
 public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("view","/views/Users/index.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request,response);
     }
 
