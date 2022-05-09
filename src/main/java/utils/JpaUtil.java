@@ -6,7 +6,7 @@ import javax.persistence.Persistence;
 
 public class JpaUtil {
     public static EntityManagerFactory getFactory(){
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("PH15016_TranVanThanh_ASM_SOF3011_WebBanHang");
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("WebQLQuayThuoc");
         return factory;
     }
     public static EntityManager getEntityManager(){

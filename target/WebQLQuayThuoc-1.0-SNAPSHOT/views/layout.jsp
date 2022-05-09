@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -53,22 +56,21 @@
                     Drug store manager
                 </a>
             </div>
-
             <ul class="nav">
                 <li class="active">
-                    <a href="#">
+                    <a href="/User/index">
                         <i class="pe-7s-user"></i>
                         <p>Users</p>
                     </a>
                 </li>
-                <li>
+                <li class="">
                     <a href="#">
                         <i class="pe-7s-graph"></i>
                         <p>Shop</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/Bill/index">
                         <i class="pe-7s-note2"></i>
                         <p>Bill</p>
                     </a>
@@ -120,8 +122,6 @@
             <jsp:include page="${view}"></jsp:include>
         </div>
 
-
-
         <footer class="footer">
             <div class="container-fluid">
                 <nav class="pull-left">
@@ -148,9 +148,9 @@
                         </li>
                     </ul>
                 </nav>
-                <p class="copyright pull-right">
-                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
-                </p>
+<%--                <p class="copyright pull-right">--%>
+<%--                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web--%>
+<%--                </p>--%>
             </div>
         </footer>
 
@@ -179,22 +179,22 @@
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="../assets/js/demo.js"></script>
 
-<script type="text/javascript">
-    $(document).ready(function(){
+<%--<script type="text/javascript">--%>
+<%--    $(document).ready(function(){--%>
 
-        demo.initChartist();
+<%--        demo.initChartist();--%>
 
-        $.notify({
-            icon: 'pe-7s-gift',
-            message: "Welcome to <b>Erione</b> - a beautiful freebie for every web developer."
+<%--        $.notify({--%>
+<%--            icon: 'pe-7s-gift',--%>
+<%--            message: "Welcome to <b>Erione</b> - a beautiful freebie for every web developer."--%>
 
-        },{
-            type: 'info',
-            timer: 4000
-        });
+<%--        },{--%>
+<%--            type: 'info',--%>
+<%--            timer: 4000--%>
+<%--        });--%>
 
-    });
-</script>
+<%--    });--%>
+<%--</script>--%>
 
 </html>
 
