@@ -2,6 +2,7 @@ package Dao;
 
 import entitys.DetailPlan;
 
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class detailPlanDao extends AbstractDao<DetailPlan> implements DaoInterface<DetailPlan>{
@@ -29,5 +30,12 @@ public class detailPlanDao extends AbstractDao<DetailPlan> implements DaoInterfa
             this.em.getTransaction().rollback();
             throw e;
         }
+    }
+    public List<DetailPlan> findByIDPlan(int id){
+        String jpql="SELECT obj from DetailPlan obj where obj.idPlan.id= :id";
+        TypedQuery<DetailPlan> query =this.em.createQuery(jpql,DetailPlan.class);
+        query.setParameter("id",id);
+        List<DetailPlan> list=query.getResultList();
+        return list;
     }
 }

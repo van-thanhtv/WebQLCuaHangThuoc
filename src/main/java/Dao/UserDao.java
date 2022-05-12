@@ -13,7 +13,7 @@ public class UserDao extends AbstractDao<User> implements DaoInterface<User>{
 
     @Override
     public List<User> findAll() {
-        return super.finAll(User.class);
+        return super.findAllUser(User.class,1);
     }
     public User findByEmail(String email){
         String jpql = "SELECT o FROM User o Where o.email =?0";

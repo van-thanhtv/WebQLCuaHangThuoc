@@ -12,30 +12,29 @@
 <div class="col-md-12">
     <div class="card card-plain">
         <div class="header">
-            <p class="category">Danh sánh Kho Chi Tiết</p>
+            <p class="category">Danh sánh Kế Hoạch Chi Tiết</p>
         </div>
         <div class="content table-responsive table-full-width">
             <table class="table table-hover">
                 <thead>
                 <th>STT</th>
                 <th>Cửa Hàng</th>
-                <th>Mã Kho</th>
+                <th>Tên Kế Hoạch</th>
                 <th>Loại Thuốc</th>
                 <th>Tên Thuốc</th>
                 <th>Dạng</th>
                 <th>Số Lượng</th>
                 <th>Đơn Giá</th>
-                <th>Ngày Nhập Kho</th>
-                <th>Ngày Hết Hạn</th>
+                <th>Tổng Tiền</th>
                 </thead>
                 <tbody>
-                <c:forEach items="${list}" var="ct" varStatus="status">
+                <c:forEach items="${detailPlans}" var="ct" varStatus="status">
                     <tr>
                         <td>#${status.count}</td>
-                        <td>${ct.idWarehouse.idShop.name}</td>
-                        <td>CH${ct.idWarehouse.id}</td>
+                        <td>${ct.idPlan.idCuaHang.name}</td>
+                        <td>${ct.idPlan.name}</td>
                         <td>
-                            ${ct.idDrug.idType.name}
+                                ${ct.idDrug.idType.name}
                         </td>
                         <td>
                                 ${ct.idDrug.name}
@@ -47,8 +46,8 @@
                                 ${ct.quantity}
                         </td>
                         <td><fmt:formatNumber value="${ct.idDrug.price}" pattern="#,###"/> VND</td>
-                        <td><fmt:formatDate value="${ct.dateAdded}" pattern="dd/MM/yyyy"/></td>
-                        <td><fmt:formatDate value="${ct.dateEnd}" pattern="dd/MM/yyyy"/></td>
+                        <td><p style="color: red"><fmt:formatNumber value="${ct.idDrug.price*ct.quantity}" pattern="#,###"/> VND</p></td>
+                        <td><button class="btn btn-primary" data-toggle="modal" data-target="#ec${ct.id}">Cập Nhât</button></td>
                     </tr>
                 </c:forEach>
                 </tbody>

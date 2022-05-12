@@ -112,6 +112,7 @@
                                         ${dc.idDrug.name},
                                     </c:forEach>
                                 </td>
+                                <c:set var="tol" scope="session" value="0"></c:set>
                                 <c:forEach items="${c.detailBills}" var="dc">
                                     <c:set var="tol" scope="session" value="${tol + dc.quantity*dc.idDrug.price}"></c:set>
                                 </c:forEach>

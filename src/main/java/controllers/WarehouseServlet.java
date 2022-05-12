@@ -127,8 +127,13 @@ public class WarehouseServlet extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             Warehouse warehouse = new Warehouse();
-            User chuShop= (User) session.getAttribute("sessionUser");
-            Shop shop = this.shopDao.findByIDchuCH(chuShop.getId());
+            User user= (User) session.getAttribute("sessionUser");
+            Shop shop = new Shop();
+            if (user.getIsAdmin()==1){
+                shop=this.shopDao.findByIDchuCH(user.getId());
+            }else if (user.getIsAdmin()==2){
+                shop=this.shopDao.findByIDchuCH(user.getUserAdd());
+            }
             warehouse.setIdShop(shop);
             warehouse.setStatus(1);
             Warehouse soHD = this.warehouseDao.create(warehouse);

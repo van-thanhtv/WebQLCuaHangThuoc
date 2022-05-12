@@ -42,12 +42,6 @@
 
                 </div>
             </div>
-            <div class="mb-3 col-12">
-                <lable>Tên Kế Hoạch</lable>
-                <input type="text" class="form-control" name="name" >
-                <lable>Ghi Chú</lable>
-                <textarea class="form-control" name="content" rows="2"></textarea>
-            </div>
             <button type="submit" class="btn btn-info btn-fill ">Thêm Vào Kho</button>
     </form>
     </div>
@@ -119,31 +113,8 @@
                             </form>
                         </td>
                         <td>
-                            <button data-toggle="modal" data-target="#b${warehouse.id}" class="btn btn-danger">Xóa</button>
+                            <button data-toggle="modal" data-target="#d${warehouse.id}" class="btn btn-danger">Xóa</button>
                         </td>
-                        <div id="b${warehouse.id}" class="modal" tabindex="-1">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h3 class="modal-title">Xác nhận</h3>
-                                        <button type="button" class="btn-close" data-dismiss="modal"
-                                                aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h5>Bạn muốn xóa Kế Hoạch ${warehouse.id} ?</h5>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <form action="/Warehouse/delete" method="post">
-                                            <input type="hidden" value="${warehouse.id}" name="id">
-                                            <button class="btn btn-danger">Xóa</button>
-                                        </form>
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                                aria-label="Close">Hủy
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </tr>
                     </c:forEach>
                     </tbody>

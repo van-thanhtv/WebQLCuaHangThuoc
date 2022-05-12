@@ -33,22 +33,42 @@ public class AbstractDao<T> {
         TypedQuery query = this.em.createQuery(sql.toString(),tClass);
         return query.getResultList();
     }
+    public List<T> findAll(Class<T> clazz, Integer exitsisStatus) {
+        String entityName = clazz.getSimpleName();// lấy tên của class
+        StringBuffer sql = new StringBuffer();
+        sql.append("SELECT o FROM ").append(entityName).append(" o");
+        if (exitsisStatus == 1) {
+            sql.append(" WHERE status !=0");
+        }
+        TypedQuery<T> query = em.createQuery(sql.toString(), clazz);
+        return query.getResultList();
+    }
+    public List<T> findAllUser(Class<T> clazz, Integer exitsisStatus) {
+        String entityName = clazz.getSimpleName();// lấy tên của class
+        StringBuffer sql = new StringBuffer();
+        sql.append("SELECT o FROM ").append(entityName).append(" o");
+        if (exitsisStatus == 1) {
+            sql.append(" WHERE status !=0 AND isAdmin !=2");
+        }
+        TypedQuery<T> query = em.createQuery(sql.toString(), clazz);
+        return query.getResultList();
+    }
+    public List<T> findUser(Class<T> clazz, Integer exitsisStatus) {
+        String entityName = clazz.getSimpleName();// lấy tên của class
+        StringBuffer sql = new StringBuffer();
+        sql.append("SELECT o FROM ").append(entityName).append(" o");
+        if (exitsisStatus == 1) {
+            sql.append(" WHERE isAdmin =2 AND status=1");
+        }
+        TypedQuery<T> query = em.createQuery(sql.toString(), clazz);
+        return query.getResultList();
+    }
     public List<T> findChuCH(Class<T> clazz, Integer exitsisStatus) {
         String entityName = clazz.getSimpleName();// lấy tên của class
         StringBuffer sql = new StringBuffer();
         sql.append("SELECT o FROM ").append(entityName).append(" o");
         if (exitsisStatus == 1) {
             sql.append(" WHERE isAdmin =1 AND status=1");
-        }
-        TypedQuery<T> query = em.createQuery(sql.toString(), clazz);
-        return query.getResultList();
-    }
-    public List<T> findAll(Class<T> clazz, Integer exitsisStatus) {
-        String entityName = clazz.getSimpleName();// lấy tên của class
-        StringBuffer sql = new StringBuffer();
-        sql.append("SELECT o FROM ").append(entityName).append(" o");
-        if (exitsisStatus == 1) {
-            sql.append(" WHERE status =1");
         }
         TypedQuery<T> query = em.createQuery(sql.toString(), clazz);
         return query.getResultList();
@@ -140,7 +160,7 @@ public class AbstractDao<T> {
         }
     }
 
-    public T delete(T entity) {
+    public T delete(T entity){
         try {
             this.em.getTransaction().begin();
             this.em.merge(entity);

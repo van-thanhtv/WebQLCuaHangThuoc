@@ -4,9 +4,9 @@
 <%@ taglib uri="http://java.sun.com/jstl/fmt_rt" prefix="fmt" %>
 <div class="card">
   <c:if test="${sessionScope.sessionUser.isAdmin==0}">
-    <div class="header">
-      <h4 class="title">Quản Lý Tài Khoản</h4>
-    </div>
+  <div class="header">
+    <h4 class="title">Quản Lý Tài Khoản</h4>
+  </div>
   </c:if>
   <c:if test="${sessionScope.sessionUser.isAdmin==1}">
     <div class="header">
@@ -60,15 +60,15 @@
         </div>
       </div>
       <c:if test="${sessionUser.isAdmin==0}">
-        <div class="row">
-          <div class=" p-3 mt-4 col-6">
-            <label class="form-label fw-bold pe-4 me-3">Phân Quyền</label>
-            <input class="form-check-input" type="radio" value="0" checked name="isAdmin">
-            <label class="form-check-label me-5">Super Admin</label>
-            <input class="form-check-input" type="radio" value="1" name="isAdmin">
-            <label class="form-check-label me-3">Admin</label>
-          </div>
+      <div class="row">
+        <div class=" p-3 mt-4 col-6">
+          <label class="form-label fw-bold pe-4 me-3">Phân Quyền</label>
+          <input class="form-check-input" type="radio" value="0" checked name="isAdmin">
+          <label class="form-check-label me-5">Super Admin</label>
+          <input class="form-check-input" type="radio" value="1" name="isAdmin">
+          <label class="form-check-label me-3">Admin</label>
         </div>
+      </div>
       </c:if>
       <button type="submit" class="btn btn-info btn-fill ">Thêm </button>
       <button type="reset" class="btn btn-info btn-fill ">Làm Mới</button>

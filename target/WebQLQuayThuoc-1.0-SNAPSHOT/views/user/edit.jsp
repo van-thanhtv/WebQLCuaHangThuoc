@@ -14,10 +14,10 @@
     <h1 class="h3 mb-0 text-gray-800">Quản Lý Tài Khoản</h1>
 </div>
 <form class=" row mt-3 ms-0 pe-0" action="/User/update?id=${user.id}" method="post" >
-    <%--    <div class="mb-3 col-6">--%>
-    <%--        <label class="form-label fw-bold">Name</label>--%>
-    <%--        <input type="text" class="form-control" name="hoTen" value="${user.avatar}">--%>
-    <%--    </div>--%>
+<%--    <div class="mb-3 col-6">--%>
+<%--        <label class="form-label fw-bold">Name</label>--%>
+<%--        <input type="text" class="form-control" name="hoTen" value="${user.avatar}">--%>
+<%--    </div>--%>
     <div class="mb-3 col-6">
         <label class="form-label fw-bold">Họ Tên</label>
         <input type="text" class="form-control" name="name" value="${user.name}">

@@ -27,8 +27,8 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-        String uri = request.getRequestURI();
         request.setAttribute("uri",1);
+        String uri = request.getRequestURI();
         if (uri.contains("/User/index")) {
             this.create(request, response);
         }
@@ -69,7 +69,7 @@ public class UserServlet extends HttpServlet {
             List<User> list = this.dao.findAll();
             request.setAttribute("ds", list);
         } else if (user.getIsAdmin() == 1) {
-            List<User> list = this.dao.findByUserCH(user.getId());
+            List<User> list = this.dao.findByUserLock(user.getId());
             request.setAttribute("ds", list);
         }
     }
