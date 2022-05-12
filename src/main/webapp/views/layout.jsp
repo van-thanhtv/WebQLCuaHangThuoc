@@ -26,6 +26,7 @@
 
     <!--  Light Bootstrap Table core CSS    -->
     <link href="../assets/css/light-bootstrap-dashboard.css?v=1.4.0" rel="stylesheet"/>
+    <link href="../assets/css/light-bootstrap-dashboard.css?v=2.0.0 " rel="stylesheet" />
 
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
@@ -39,17 +40,34 @@
 
 </head>
 <body>
-
+<c:forEach items="${ds}" var="user">
+    <!-- Mini Modal -->
+    <div class="modal fade modal-mini modal-primary" id="a${user.id}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header justify-content-center">
+                    <div class="modal-profile">
+                        <i class="nc-icon nc-bulb-63"></i>
+                    </div>
+                </div>
+                <div class="modal-body text-center">
+                    <h5>Bạn muốn xóa người dùng ${user.name} ?</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link btn-simple">Back</button>
+                    <button type="button" class="btn btn-link btn-simple" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  End Modal -->
+</c:forEach>
 <div class="wrapper">
     <div class="sidebar" data-color="blue" data-image="assets/img/sidebar-5.jpg">
-
         <!--
-
             Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
             Tip 2: you can also add an image using data-image tag
-
         -->
-
         <div class="sidebar-wrapper">
             <div class="logo">
                 <a href="http://www.creative-tim.com" class="simple-text">
@@ -57,38 +75,52 @@
                 </a>
             </div>
             <ul class="nav">
-                <li class="active">
+                <li class="
+                    <c:if test="${uri==1}">
+                        active
+                    </c:if>">
                     <a href="/User/index">
                         <i class="pe-7s-user"></i>
                         <p>Users</p>
                     </a>
                 </li>
-                <li class="">
-                    <a href="#">
+                <li class="
+                    <c:if test="${uri==2}">
+                        active
+                    </c:if>">
+                    <a href="/Shop/index">
                         <i class="pe-7s-graph"></i>
                         <p>Shop</p>
                     </a>
                 </li>
-                <li>
+                <li class="<c:if test="${uri==3}">
+                        active
+                    </c:if>">
                     <a href="/Bill/index">
                         <i class="pe-7s-note2"></i>
                         <p>Bill</p>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
+                <li class="<c:if test="${uri==4}">
+                        active
+                    </c:if>">
+                    <a href="/Plan/index">
                         <i class="pe-7s-news-paper"></i>
-                        <p>Pane</p>
+                        <p>Plan</p>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
+                <li class="<c:if test="${uri==5}">
+                        active
+                    </c:if>">
+                    <a href="/Warehouse/index">
                         <i class="pe-7s-science"></i>
                         <p>Warehouse</p>
                     </a>
                 </li>
-                <li>
-                    <a href="#">
+                <li class="<c:if test="${uri==6}">
+                        active
+                    </c:if>">
+                    <a href="/Drug/index">
                         <i class="pe-7s-drop"></i>
                         <p>Drug</p>
                     </a>
@@ -108,7 +140,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="/signout">
                                 <p>Log out</p>
                             </a>
                         </li>
@@ -120,6 +152,7 @@
 
         <div class="container-fluid">
             <jsp:include page="${view}"></jsp:include>
+            <jsp:include page="${view1}"></jsp:include>
         </div>
 
         <footer class="footer">
@@ -148,9 +181,6 @@
                         </li>
                     </ul>
                 </nav>
-<%--                <p class="copyright pull-right">--%>
-<%--                    &copy; <script>document.write(new Date().getFullYear())</script> <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web--%>
-<%--                </p>--%>
             </div>
         </footer>
 
@@ -179,22 +209,7 @@
 <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 <script src="../assets/js/demo.js"></script>
 
-<%--<script type="text/javascript">--%>
-<%--    $(document).ready(function(){--%>
-
-<%--        demo.initChartist();--%>
-
-<%--        $.notify({--%>
-<%--            icon: 'pe-7s-gift',--%>
-<%--            message: "Welcome to <b>Erione</b> - a beautiful freebie for every web developer."--%>
-
-<%--        },{--%>
-<%--            type: 'info',--%>
-<%--            timer: 4000--%>
-<%--        });--%>
-
-<%--    });--%>
-<%--</script>--%>
+<script src="../assets/js/plugins/bootstrap-switch.js"></script>
 
 </html>
 

@@ -28,6 +28,11 @@ public class Drug {
 
     @Column(name = "status")
     private Integer status;
-
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private TypeDrug idType;
+    @ManyToOne
+    @JoinColumn(name = "form_id")
+    private FormDrug idForm;
 
 }

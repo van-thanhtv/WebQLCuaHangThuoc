@@ -51,7 +51,7 @@
         </span>
         </div>
         <div class="wrap-login100 p-l-110 p-r-110 p-t-20 p-b-33">
-            <mark>${messgare}</mark>
+            ${messgare}
                 <input id="form-token" type="hidden" name="_csrf"
                        value="OWFJell3VEhNWSgVaz4Se1BYOSsTQQJ8WhIwD3QABRkLEnk3Fy4mAw==">
                 <div class="p-t-10 p-b-10 col-md-12" style=": center;color: #555">
@@ -77,8 +77,20 @@
                 </form>
         </div>
     </div>
-</div>
+<c:if test="${result!= null }">
+    <p
+            style="text-align: center; background: antiquewhite; padding: 5px; display: block;">
+            ${messgare }</p>
 
+    <c:if test="${result =='success'}">
+        <script type="text/javascript">
+            setTimeout(()=>{
+                window.location.replace("http://localhost:8080/login");
+            }, 2000);
+        </script>
+    </c:if>
+</c:if>
+</div>
 
 <div id="dropDownSelect1"></div>
 

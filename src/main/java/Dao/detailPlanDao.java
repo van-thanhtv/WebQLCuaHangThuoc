@@ -14,4 +14,20 @@ public class detailPlanDao extends AbstractDao<DetailPlan> implements DaoInterfa
     public List<DetailPlan> findAll() {
         return super.finAll(DetailPlan.class);
     }
+    public int deleteList(List<DetailPlan> entitys) throws Exception{
+        int i =0;
+        try {
+            this.em.getTransaction().begin();
+            for (DetailPlan entity : entitys) {
+                em.remove(em.contains(entity) ? entity : em.merge(entity));;
+                i++;
+            }
+            this.em.getTransaction().commit();
+            return i;
+        }catch (Exception e){
+            e.printStackTrace();
+            this.em.getTransaction().rollback();
+            throw e;
+        }
+    }
 }

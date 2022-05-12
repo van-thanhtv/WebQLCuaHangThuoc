@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @NoArgsConstructor
@@ -25,17 +26,17 @@ public class DetailedWarehouse {
     private Integer quantity;
 
     @Column(name = "DateAdded")
-    private Integer dateAdded;
+    private Date dateAdded;
 
     @Column(name = "DateEnd")
-    private Integer dateEnd;
-
-    @Column(name = "status")
-    private Integer status;
+    private Date dateEnd;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idWarehouse")
     private Warehouse idWarehouse;
 
-
+    @Override
+    public String toString() {
+        return "DetailedWarehouse{}";
+    }
 }

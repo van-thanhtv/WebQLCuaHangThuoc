@@ -5,30 +5,23 @@ import entitys.User;
 import org.apache.commons.beanutils.BeanUtils;
 import utils.EncryptUtil;
 import utils.XCookie;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-import java.util.function.Consumer;
 
-import javax.activation.DataHandler;
-import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.*;
-import javax.servlet.http.Part;
-import java.io.File;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
+import java.util.Random;
 
 @WebServlet(name = "loginServlet", value = {"/login","/register", "/signout", "/forgot", "/send"})
-public class loginServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
     private static final String alpha = "abcdefghijklmnopqrstuvwxyz"; // a-z
     private static final String alphaUpperCase = alpha.toUpperCase(); // A-Z
     private static final String digits = "0123456789"; // 0-9
@@ -40,7 +33,7 @@ public class loginServlet extends HttpServlet {
     String username = "vanthanhtvph15016@gmail.com";
     String messgare = "";
 
-    public loginServlet() {
+    public LoginServlet() {
         this.userDao = new UserDao();
     }
 
@@ -54,14 +47,14 @@ public class loginServlet extends HttpServlet {
             if (u != null) {
                 XCookie.add(response, "sessionUser", "0", 0);
                 request.getSession().removeAttribute("sessionUser");
-                request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/account/login.jsp").forward(request, response);
             } else {
                 response.getWriter().print("error");
-                request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/account/login.jsp").forward(request, response);
             }
         } else if (request.getRequestURI().contains("forgot")){
 
-            request.getRequestDispatcher("/views/forgotPassword.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/account/forgotPassword.jsp").forward(request, response);
         }else {
             System.out.println("login");
             String remmeber = XCookie.get(request, "user_remmeber", null);
@@ -70,7 +63,7 @@ public class loginServlet extends HttpServlet {
                 request.setAttribute("sessionUser", (User) request.getSession().getAttribute("user_remmeber"));
             }
             request.setAttribute("pageTitle", "Login");
-            request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/account/login.jsp").forward(request, response);
         }
     }
 
@@ -120,7 +113,7 @@ public class loginServlet extends HttpServlet {
                     }
                 }
             }
-            request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/views/account/login.jsp").forward(request, response);
         }else if (uri.contains("send")){
             String email = request.getParameter("email");
             int numberOfCharactor = 5;
@@ -139,8 +132,8 @@ public class loginServlet extends HttpServlet {
                 Session session = Session.getInstance(props, new Authenticator() {
                     @Override
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        String username = "vanthanhtvph15016@gmail.com";
-                        String password = "thanhk52a2";
+                        String username = "anhthong645@gmail.com";
+                        String password = "19092002thong";
                         return new PasswordAuthentication(username,password);
                     }
                 });
@@ -177,19 +170,22 @@ public class loginServlet extends HttpServlet {
             if (u == null || !EncryptUtil.check(user.getPassword(), u.getPassword())) {
                 request.setAttribute("result", "error");
                 request.setAttribute("message", "Tài khoản hoặc mật khẩu không chính xác!");
-                request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+                request.getRequestDispatcher("/views/account/login.jsp").forward(request, response);
             } else {
-                if (request.getParameter("remember") != null) {
-                    XCookie.add(response, "user_remmeber",String.valueOf(u.getId()), 600);
+                if (u.getStatus()==1){
+                    if (request.getParameter("remember") != null) {
+                        XCookie.add(response, "user_remmeber",String.valueOf(u.getId()), 600);
+                    }
+                    request.getServletContext().setAttribute("sessionUser", u);
+                    request.getSession().setAttribute("sessionUser", u);
+                    request.setAttribute("result", "success");
+                    request.setAttribute("message", "Đăng nhập thành công, bạn sẽ được di chuyển về trang chủ!");
+                    request.getRequestDispatcher("/views/account/login.jsp").forward(request, response);
+                }else {
+                    request.setAttribute("result", "error");
+                    request.setAttribute("message", "Tài khoản này đã bị xóa hoặc khóa rồi!");
                 }
-                request.getServletContext().setAttribute("sessionUser", u);
-                u.setPassword(user.getPassword());
-                request.getSession().setAttribute("sessionUser", u);
-                System.out.println(request.getSession().getId());
-                System.out.println((User) request.getSession().getAttribute("sessionUser"));
-                request.setAttribute("result", "success");
-                request.setAttribute("message", "Đăng nhập thành công, bạn sẽ được di chuyển về trang chủ!");
-                request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+
             }
         }
     }

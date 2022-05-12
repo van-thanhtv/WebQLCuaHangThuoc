@@ -29,8 +29,18 @@ public class AbstractDao<T> {
     public List<T> finAll(Class<T> tClass){
         String nameEntity = tClass.getSimpleName();
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT o FROM ").append(nameEntity).append(" o ORDER BY o.dateOrder DESC");
+        sql.append("SELECT o FROM ").append(nameEntity).append(" o");
         TypedQuery query = this.em.createQuery(sql.toString(),tClass);
+        return query.getResultList();
+    }
+    public List<T> findChuCH(Class<T> clazz, Integer exitsisStatus) {
+        String entityName = clazz.getSimpleName();// lấy tên của class
+        StringBuffer sql = new StringBuffer();
+        sql.append("SELECT o FROM ").append(entityName).append(" o");
+        if (exitsisStatus == 1) {
+            sql.append(" WHERE isAdmin =1 AND status=1");
+        }
+        TypedQuery<T> query = em.createQuery(sql.toString(), clazz);
         return query.getResultList();
     }
     public List<T> findAll(Class<T> clazz, Integer exitsisStatus) {

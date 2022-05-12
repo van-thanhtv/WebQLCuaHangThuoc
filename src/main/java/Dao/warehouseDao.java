@@ -14,4 +14,7 @@ public class warehouseDao extends AbstractDao<Warehouse> implements DaoInterface
     public List<Warehouse> findAll() {
         return super.finAll(Warehouse.class);
     }
+    public List<Warehouse> findByWarehouseCH(Integer id) {
+        return super.findMany(Warehouse.class, "SELECT obj from Warehouse obj where obj.status=1 AND obj.idShop.id= ?0", id);
+    }
 }
