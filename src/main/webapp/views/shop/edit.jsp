@@ -32,7 +32,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Tên Cửa Hàng</label>
-                        <input type="email" class="form-control" placeholder="Tên Cửa Hàng" name="name" value="${shop.name}">
+                        <input type="text" class="form-control" placeholder="Tên Cửa Hàng" name="name" value="${shop.name}">
                     </div>
                 </div>
             </div>
