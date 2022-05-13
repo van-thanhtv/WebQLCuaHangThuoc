@@ -16,7 +16,7 @@ import java.util.List;
         "/Bill/store",
         "/Bill/edit",
         "/Bill/update",
-        "/Bill/delete",})
+        "/Bill/delete","/Bill/remove",})
 public class BillServlet extends HttpServlet {
     private billDao billDao;
     private detailBillDao detailBillDao;
@@ -47,6 +47,9 @@ public class BillServlet extends HttpServlet {
             edit(request, response);
         }else if (uri.contains("sup")){
             this.sup(request, response);
+        }else if (uri.contains("remove")) {
+            this.deleteHD(request, response);
+            //404
         }else {
             //404
         }
@@ -76,7 +79,22 @@ public class BillServlet extends HttpServlet {
         request.setAttribute("view", "/views/Bill/index.jsp");
         request.getRequestDispatcher("/views/layout.jsp").forward(request, response);
     }
-
+    private void deleteHD(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String s = request.getParameter("id");
+        int id = Integer.parseInt(s);
+        if (this.billListTam.size() > 0) {
+            for (DetailBill ct : this.billListTam) {
+                if (ct.getIdDrug().getId() == id) {
+                    this.billListTam.remove(ct);
+                    break;
+                }
+            }
+        }
+        if (this.billListTam.isEmpty()) {
+            this.billListTam.clear();
+        }
+        response.sendRedirect("/Bill/index");
+    }
     private void extracted(HttpServletRequest request) {
         HttpSession session= request.getSession();
         User tk = (User) session.getAttribute("sessionUser");
@@ -190,8 +208,8 @@ public class BillServlet extends HttpServlet {
         Shop shop = new Shop();
         if (tk.getIsAdmin()==1){
             shop = shopDao.findByIDchuCH(tk.getId());
-        }else if (tk.getIsAdmin()==0){
-
+        }else if (tk.getIsAdmin()==2){
+            shop = this.shopDao.findByIDchuCH(tk.getUserAdd());
         }
         Bill bill = new Bill();
         bill.setIdShop(shop);

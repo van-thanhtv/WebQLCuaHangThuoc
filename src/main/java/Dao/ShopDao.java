@@ -12,7 +12,7 @@ public class ShopDao extends AbstractDao<Shop> implements DaoInterface<Shop>{
 
     @Override
     public List<Shop> findAll() {
-        return super.finAll(Shop.class);
+        return super.findAll(Shop.class,1);
     }
     public Shop findByIDchuCH(Integer id) {
         return super.findOne(Shop.class, "SELECT obj from Shop obj where obj.idChuCH.id= ?0", id);

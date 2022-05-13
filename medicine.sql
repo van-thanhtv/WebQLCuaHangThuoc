@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: May 08, 2022 at 07:56 PM
+-- Generation Time: May 13, 2022 at 02:43 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -34,6 +34,15 @@ CREATE TABLE `bill` (
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `bill`
+--
+
+INSERT INTO `bill` (`id`, `idShop`, `idUser`, `status`) VALUES
+(1, 1, 2, NULL),
+(3, 1, 2, NULL),
+(10, 1, 3, NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -47,6 +56,16 @@ CREATE TABLE `detailBill` (
   `quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `detailBill`
+--
+
+INSERT INTO `detailBill` (`id`, `idBill`, `idDrug`, `quantity`) VALUES
+(1, 1, 1, 3),
+(2, 3, 2, 1),
+(5, 10, 3, 3),
+(6, 10, 2, 2);
+
 -- --------------------------------------------------------
 
 --
@@ -57,11 +76,19 @@ CREATE TABLE `detailedWarehouse` (
   `id` int(11) NOT NULL,
   `idDrug` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT NULL,
-  `DateAdded` int(11) DEFAULT NULL,
-  `DateEnd` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
+  `DateAdded` date DEFAULT NULL,
+  `DateEnd` date DEFAULT NULL,
   `idWarehouse` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `detailedWarehouse`
+--
+
+INSERT INTO `detailedWarehouse` (`id`, `idDrug`, `quantity`, `DateAdded`, `DateEnd`, `idWarehouse`) VALUES
+(1, 1, 10, '2022-05-12', '2022-05-27', 1),
+(2, 2, 11, '2022-05-12', '2022-05-29', 1),
+(24, 3, 1, '2022-05-12', '2022-05-29', 1);
 
 -- --------------------------------------------------------
 
@@ -76,6 +103,21 @@ CREATE TABLE `detailPlan` (
   `quantity` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `detailPlan`
+--
+
+INSERT INTO `detailPlan` (`id`, `idPlan`, `idDrug`, `quantity`) VALUES
+(10, 7, 1, 1),
+(11, 7, 2, 1),
+(12, 8, 3, 1),
+(13, 8, 2, 1),
+(14, 8, 1, 1),
+(15, 9, 1, 1),
+(16, 10, 1, 1),
+(17, 10, 2, 1),
+(18, 10, 3, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -87,8 +129,19 @@ CREATE TABLE `drug` (
   `name` varchar(50) CHARACTER SET utf8 DEFAULT NULL,
   `price` double DEFAULT NULL,
   `term` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
+  `status` int(11) DEFAULT NULL,
+  `type_id` int(11) DEFAULT NULL,
+  `form_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `drug`
+--
+
+INSERT INTO `drug` (`id`, `name`, `price`, `term`, `status`, `type_id`, `form_id`) VALUES
+(1, 'Thuốc sổ', 15000, 15, 1, 1, 1),
+(2, 'Thuốc trừ sâu', 500000, 17, 1, 2, 4),
+(3, 'Iu em', 22300, 17, 1, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -104,6 +157,16 @@ CREATE TABLE `plan` (
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `plan`
+--
+
+INSERT INTO `plan` (`id`, `name`, `idCuaHang`, `content`, `status`) VALUES
+(7, 'Phạm Đức Mạnh 2', 1, 'thanh', 2),
+(8, 'Trằn Văn Thành', 1, 'KH2', 3),
+(9, 'Phạm Đức Mạnh 2', 1, 'hi', 2),
+(10, 'Phạm Đức Mạnh', 1, 'dfgdsg', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -117,6 +180,14 @@ CREATE TABLE `shop` (
   `address` varchar(100) CHARACTER SET utf8 DEFAULT NULL,
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `shop`
+--
+
+INSERT INTO `shop` (`id`, `name`, `idChuCH`, `address`, `status`) VALUES
+(1, 'Thuốc pro', 2, 'So 1 trinh van bo', 1),
+(2, 'CH1', 5, 'Quảng Ninh', 1);
 
 -- --------------------------------------------------------
 
@@ -133,8 +204,22 @@ CREATE TABLE `Users` (
   `birthday` date DEFAULT NULL,
   `sdt` varchar(15) CHARACTER SET utf8 DEFAULT NULL,
   `isAdmin` int(11) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
+  `status` int(11) DEFAULT NULL,
+  `userAdd` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `Users`
+--
+
+INSERT INTO `Users` (`id`, `name`, `email`, `password`, `sex`, `birthday`, `sdt`, `isAdmin`, `status`, `userAdd`) VALUES
+(1, 'Trằn Văn Thành', 'thanhtvph15015@gmail.com', '$2a$10$yApxEAnhdT.XupOF2pXt0umATH5QBRQuHU4Ai7kCSOyKnXqQ2ONoW', 1, '2022-05-04', '0385613085', 0, 1, NULL),
+(2, 'Trằn Văn Thành2', 'vanthanh10012k@gmail.com', '$2a$10$EqsndFl3oTAdBGjUJCh0j.5qJtMLZmiycej.Nr7vw6fA254AdQbY2', 1, '2022-05-12', '131231241241414', 1, 1, NULL),
+(3, 'thanh', 'thanhtvph15014@gmail.com', '$2a$10$XH1D45lJ.2wGp7LudUemy.iMHaSNFHfpQcn5z8hS1pwxo3YYLheDW', 1, '2022-05-14', '131231241241', 2, 1, 2),
+(4, 'Phạm Đức Mạnh 2', 'thanhtvph15013@gmail.com', '$2a$10$6czgYIjre5RLTb9C59msaOGq9dLy.QH.pkzqiaWYGUrqL6CYQdMMu', 1, '2022-05-11', '03856130855', 2, 1, 2),
+(5, 'Trằn', 'vanthanh10011k@gmail.com', '$2a$10$I7wDmoy9ESxoQd2cujFZ7.QCAa.IqJjNoqOSdY.yvAoP/GXTXag/O', 1, '2022-05-26', '0385613', 1, 1, NULL),
+(6, 'Sang', 'thanhtvph15016@fpt.edu.vn', '$2a$10$V8vUFftU1ZiFIw0slU/EceOE1eAcwo4IA4lULhwtgFMKetqX4FEtK', 1, '2022-05-04', '038561', 1, 1, NULL),
+(7, 'Tú', 'thanhtvph1501@fpt.edu.vn', '$2a$10$1xWZuStBbkmRHI9DbDRJ0OWWibI2MTZGCyrTPZXumJTo64TBdJzbe', 0, '2022-05-20', '13123121222', 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -147,6 +232,13 @@ CREATE TABLE `warehouse` (
   `idShop` int(11) DEFAULT NULL,
   `status` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `warehouse`
+--
+
+INSERT INTO `warehouse` (`id`, `idShop`, `status`) VALUES
+(1, 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -188,7 +280,9 @@ ALTER TABLE `detailPlan`
 -- Indexes for table `drug`
 --
 ALTER TABLE `drug`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `FKkejp72b6ler1qqarkx09g9af6` (`form_id`),
+  ADD KEY `FKkjiptvdxfgtlck06hq938axdo` (`type_id`);
 
 --
 -- Indexes for table `plan`
@@ -225,55 +319,55 @@ ALTER TABLE `warehouse`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `detailBill`
 --
 ALTER TABLE `detailBill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `detailedWarehouse`
 --
 ALTER TABLE `detailedWarehouse`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `detailPlan`
 --
 ALTER TABLE `detailPlan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `drug`
 --
 ALTER TABLE `drug`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `plan`
 --
 ALTER TABLE `plan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `shop`
 --
 ALTER TABLE `shop`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `warehouse`
 --
 ALTER TABLE `warehouse`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -306,6 +400,13 @@ ALTER TABLE `detailedWarehouse`
 ALTER TABLE `detailPlan`
   ADD CONSTRAINT `detailPlan_drug_id_fk` FOREIGN KEY (`idDrug`) REFERENCES `drug` (`id`),
   ADD CONSTRAINT `detailPlan_plan_id_fk` FOREIGN KEY (`idPlan`) REFERENCES `plan` (`id`);
+
+--
+-- Constraints for table `drug`
+--
+ALTER TABLE `drug`
+  ADD CONSTRAINT `FKkejp72b6ler1qqarkx09g9af6` FOREIGN KEY (`form_id`) REFERENCES `formDrug` (`id`),
+  ADD CONSTRAINT `FKkjiptvdxfgtlck06hq938axdo` FOREIGN KEY (`type_id`) REFERENCES `typeDrug` (`id`);
 
 --
 -- Constraints for table `plan`

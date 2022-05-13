@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-<h2>Welcome to AE-shopp-Pro: Sign in/up Form</h2>
+<h2>Welcome to Welcome to YEU drug store: Sign in/up Form</h2>
 <div class="container" id="container">
     <div class="form-container sign-up-container">
         <form action="/register" method="post">

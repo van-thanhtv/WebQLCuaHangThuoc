@@ -333,7 +333,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <a href="">
-                                <p>Account</p>
+                                <p>${sessionScope.sessionUser.name}</p>
                             </a>
                         </li>
                         <li>

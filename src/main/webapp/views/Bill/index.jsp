@@ -77,7 +77,7 @@
                             <td>${drug.idDrug.idForm.name}</td>
                             <td><fmt:formatDate value="${drug.dateAdded}" pattern="dd/MM/yyyy"/></td>
                             <td><fmt:formatDate value="${drug.dateEnd}" pattern="dd/MM/yyyy"/></td>
-                            <td><a href="/Bill/edit?id=${drug.id}" class="btn btn-info">Add</a></td>
+                            <td><a href="/Bill/edit?id=${drug.idDrug.id}" class="btn btn-info">Add</a></td>
                         </tr>
                     </c:forEach>
                     </tbody>

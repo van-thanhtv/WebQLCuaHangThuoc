@@ -12,6 +12,6 @@ public class drugDao extends AbstractDao<Drug> implements DaoInterface<Drug>{
 
     @Override
     public List<Drug> findAll() {
-        return super.finAll(Drug.class);
+        return super.findAll(Drug.class,1);
     }
 }
