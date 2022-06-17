@@ -116,11 +116,14 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("/views/account/login.jsp").forward(request, response);
         }else if (uri.contains("send")){
             String email = request.getParameter("email");
+            User user = this.userDao.findByEmail(email);
             int numberOfCharactor = 5;
             String pass = randomAlphaNumeric(numberOfCharactor);
+            user.setPassword(EncryptUtil.encrypt(pass));
             response.setContentType("text/html; charset=UTF-8");
             request.setCharacterEncoding("UTF-8");
             try {
+                this.userDao.update(user);
                 //Thông số để kết nối Smtp Server
                 Properties props = new Properties();
                 props.setProperty("mail.smtp.auth","true");
@@ -132,8 +135,8 @@ public class LoginServlet extends HttpServlet {
                 Session session = Session.getInstance(props, new Authenticator() {
                     @Override
                     protected PasswordAuthentication getPasswordAuthentication() {
-                        String username = "anhthong645@gmail.com";
-                        String password = "19092002thong";
+                        String username = "vanthanhtvph15016@gmail.com";
+                        String password = "thanhk52a2";
                         return new PasswordAuthentication(username,password);
                     }
                 });
